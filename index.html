@@ -61,11 +61,15 @@ function doLoginHub() {
   .then(response => response.json())
   .then(data => {
     if (data.ok) {
-      const session = { usuario: u, rol: data.rol, nombre: data.label, promotores: data.promotores };
-      localStorage.setItem('user_session', JSON.stringify(session));
-      
-      // Magia: Si el login es correcto, lo mandamos directo a la otra página
-      window.location.href = URL_DEL_PORTAL; 
+      const session = { 
+  usuario: u, 
+  userHash: data.userHash, // Guardamos el hash
+  rol: data.rol, 
+  nombre: data.label, 
+  promotores: data.promotores 
+};
+localStorage.setItem('user_session', JSON.stringify(session));
+window.location.href = URL_DEL_PORTAL; 
     } else {
       document.getElementById('loginErr').textContent = 'Credenciales incorrectas';
       document.getElementById('loginErr').style.display = 'block';
