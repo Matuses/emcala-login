@@ -63,10 +63,11 @@ function doLoginHub() {
     if (data.ok) {
       const session = { 
   usuario: u, 
-  userHash: data.userHash, // Guardamos el hash
+  userHash: data.userHash,
   rol: data.rol, 
   nombre: data.label, 
-  promotores: data.promotores 
+  promotores: data.promotores,
+  lastActivity: Date.now()
 };
 localStorage.setItem('user_session', JSON.stringify(session));
 window.location.href = URL_DEL_PORTAL; 
